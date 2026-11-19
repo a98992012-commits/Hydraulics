@@ -39,7 +39,7 @@ main{max-width:1150px;margin:auto;padding:18px clamp(12px,3vw,28px)}.tabs{displa
   .motor,.pump{font-size:12px}
 }
 </style></head><body>
-<header><div class="head"><div><h1>H1 維護管理</h1><div class="sub">設備配置與維護資訊｜馬達／油箱</div></div><div class="head-actions"><button class="btn" onclick="saveSnapshot()">更新</button><button class="btn" onclick="undoSnapshot()">上一動</button></div></div></header>
+<header><div class="head"><div><h1>H1 維護管理</h1><div class="sub">設備配置與維護資訊｜馬達／油箱</div></div><div class="head-actions"><button class="btn" type="button" onclick="checkVersion()">檢查版本</button><button class="btn" onclick="undoSnapshot()">上一動</button></div></div></header>
 <main><nav class="tabs"><div class="tab-links"><a class="tab" href="index.html">01　濾網資料</a><a class="tab active" href="motors.html">02　馬達／油箱</a></div><div class="data-actions"><button class="data-btn" type="button" onclick="exportH1Data()">匯出資料</button><button class="data-btn" type="button" onclick="document.getElementById(&quot;importDataFile&quot;).click()">載入資料</button><input id="importDataFile" type="file" accept="application/json,.json" hidden onchange="importH1Data(event)"></div></nav>
 <section class="inside"><div class="label">H1 內部設備配置</div><div class="floor">
 <div class="tank" id="tank"><b>H1 油箱</b><button class="tank-btn tank-history-btn" type="button" onclick="showFuelHistory()">歷史紀錄</button><div class="tank-actions"><button class="tank-btn" type="button" onclick="openFuelModal()">加油</button></div><div class="fuel-log" id="fuelLog"></div></div>
@@ -97,6 +97,28 @@ renderFuelRecords();
 function confirmExportH1Data(){if(!confirm('確定要匯出 H1 所有維護資料嗎？'))return;exportH1Data()}
 function exportH1Data(){const keys=['h1-filter-records-v1','h1-active-filters-v1','h1-filter-details-v1','h1-tank-fuel-records-v1'];const data={format:'H1-maintenance-backup',version:1,exportedAt:new Date().toISOString(),data:{}};keys.forEach(k=>{const v=localStorage.getItem(k);if(v!==null)data.data[k]=JSON.parse(v)});const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const link=document.createElement('a');link.href=url;link.download='H1-maintenance-backup-'+new Date().toISOString().slice(0,10)+'.json';link.click();URL.revokeObjectURL(url)}
 function importH1Data(event){const file=event.target.files&&event.target.files[0];event.target.value='';if(!file)return;const reader=new FileReader();reader.onload=()=>{try{const backup=JSON.parse(reader.result);if(backup.format!=='H1-maintenance-backup'||!backup.data||typeof backup.data!=='object')throw new Error('格式不符');if(!confirm('載入備份會覆蓋目前的濾網、使用中狀態及油箱加油資料。確定繼續嗎？'))return;const keys=['h1-filter-records-v1','h1-active-filters-v1','h1-filter-details-v1','h1-tank-fuel-records-v1'];keys.forEach(k=>{if(Object.prototype.hasOwnProperty.call(backup.data,k))localStorage.setItem(k,JSON.stringify(backup.data[k]));else localStorage.removeItem(k)});renderFuelRecords();alert('資料載入完成。');}catch(e){alert('無法載入：檔案不是有效的 H1 備份。')}};reader.readAsText(file)}
-function saveSnapshot(){localStorage.setItem('h1-motor-snapshot',document.querySelector('.inside').innerHTML);alert('已保存目前頁面狀態。')}
+function saveSnapshot(showMessage=true){localStorage.setItem('h1-motor-snapshot',document.querySelector('.inside').innerHTML);if(showMessage)alert('已保存目前頁面狀態。')}
 function undoSnapshot(){const s=localStorage.getItem('h1-motor-snapshot');if(!s){alert('尚無可還原的上一動');return}document.querySelector('.inside').innerHTML=s;alert('已還原上一動（本地保存版本）。')}
+
+const CURRENT_H1_VERSION='1.0.1';
+async function checkVersion(){
+ saveSnapshot(false);
+ try{
+  const response=await fetch('./version.json?check='+Date.now(),{cache:'no-store'});
+  if(!response.ok)throw new Error('版本資訊讀取失敗');
+  const latest=await response.json();
+  if(!latest.version)throw new Error('版本資訊格式錯誤');
+  if(String(latest.version)===CURRENT_H1_VERSION){
+   alert('目前已是最新版本（'+CURRENT_H1_VERSION+'）。');
+   return;
+  }
+  if(confirm('發現網站版本更新：目前 '+CURRENT_H1_VERSION+'，最新 '+latest.version+'。\n是否立即重新載入新版？')){
+   const target=new URL(location.href);
+   target.searchParams.set('v',String(latest.version));
+   location.replace(target.toString());
+  }
+ }catch(error){
+  alert('目前無法檢查版本，請稍後再試。\n'+error.message);
+ }
+}
 </script></body></html>
