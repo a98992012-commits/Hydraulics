@@ -67,10 +67,39 @@ footer{text-align:center;color:#71869a;font-size:11px;padding:8px 0 0}
   .head-actions .actionbtn{font-size:11px;padding:8px 5px}
   .area{padding:8px}
 }
+
+/* 手機橫向顯示切換 */
+.orientation-btn{display:none}
+@media(max-width:650px){.orientation-btn{display:inline-block}}
+html.landscape-mode,html.landscape-mode body{overflow:hidden!important}
+body.landscape-mode{
+ position:fixed!important;top:0;left:0;width:100vh!important;height:100vw!important;
+ max-width:none!important;overflow:auto!important;transform-origin:top left;
+ transform:rotate(90deg) translateY(-100%);z-index:1
+}
+body.landscape-mode header{padding:10px 16px}
+body.landscape-mode .head{flex-wrap:nowrap;align-items:center}
+body.landscape-mode .head>div:first-child{flex:0 1 auto}
+body.landscape-mode .head-actions{width:auto;flex-wrap:nowrap}
+body.landscape-mode main{max-width:none;padding:10px 16px 20px}
+body.landscape-mode .tabs{display:flex;flex-wrap:nowrap;align-items:center}
+body.landscape-mode .tab-links{flex:0 0 auto;display:flex}
+body.landscape-mode .data-actions{width:auto;display:flex}
+body.landscape-mode .layout{grid-template-columns:90px minmax(0,1fr);gap:8px}
+body.landscape-mode .leftwalk{display:flex}
+body.landscape-mode .leftwalk .outside-card{width:100%;min-height:110px}
+body.landscape-mode .filter-layout{grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}
+body.landscape-mode .inside{padding:9px}
+body.landscape-mode .filter{padding:34px 5px 8px;min-height:62px}
+body.landscape-mode .filter-card>strong{font-size:12px}
+body.landscape-mode .filter-meta{font-size:10px}
+body.landscape-mode .replace-btn{font-size:10px;padding:5px 7px}
+body.landscape-mode .history-btn,body.landscape-mode .detail-btn{font-size:9px;padding:3px 4px}
+body.landscape-mode .highpressure{width:min(100%,340px)}
 </style>
 </head>
 <body>
-<header><div class="head"><div><h1>H1 維護管理</h1><div class="subtitle">設備配置與維護資訊｜首頁模板</div></div><div class="head-actions"><button class="actionbtn" type="button" onclick="checkVersion()">檢查版本</button><button class="actionbtn" onclick="showAllHistory()">全部歷史紀錄</button><button class="actionbtn" onclick="undoSnapshot()">上一動</button></div></div></header>
+<header><div class="head"><div><h1>H1 維護管理</h1><div class="subtitle">設備配置與維護資訊｜首頁模板</div></div><div class="head-actions"><button class="actionbtn" type="button" onclick="checkVersion()">檢查版本</button><button class="actionbtn orientation-btn" type="button" onclick="toggleLandscapeMode()" aria-pressed="false">橫向顯示</button><button class="actionbtn" onclick="showAllHistory()">全部歷史紀錄</button><button class="actionbtn" onclick="undoSnapshot()">上一動</button></div></div></header>
 <main>
 <nav class="tabs" aria-label="頁面區域"><div class="tab-links"><a class="tab active" href="index.html" style="text-decoration:none">01　濾網資料</a><a class="tab" href="motors.html" style="text-decoration:none">02　馬達／油箱</a></div><div class="data-actions"><button class="data-btn" type="button" onclick="confirmExportH1Data()">匯出資料</button><button class="data-btn" type="button" onclick="document.getElementById(&quot;importDataFile&quot;).click()">載入資料</button><input id="importDataFile" type="file" accept="application/json,.json" hidden onchange="importH1Data(event)"></div></nav>
 <section class="area"><div class="area-title">上方走道</div><div class="walkway"><div class="outside-card"><strong>深層淨油機</strong><small style="color:var(--muted);margin-top:5px">Deep Oil Purifier</small><div class="filter-meta" data-asset-meta="deep-purifier"></div><button class="replace-btn" data-asset-id="deep-purifier" onclick="openReplace(this)">更換</button><button class="replace-btn history-btn" onclick="showHistory('deep-purifier','深層淨油機')">歷史紀錄</button></div></div></section>
@@ -209,7 +238,29 @@ function confirmExportH1Data(){if(!confirm('確定要匯出 H1 所有維護資�
 function exportH1Data(){const keys=['h1-filter-records-v1','h1-active-filters-v1','h1-filter-details-v1','h1-tank-fuel-records-v1'];const data={format:'H1-maintenance-backup',version:1,exportedAt:new Date().toISOString(),data:{}};keys.forEach(k=>{const v=localStorage.getItem(k);if(v!==null)data.data[k]=JSON.parse(v)});const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const link=document.createElement('a');link.href=url;link.download='H1-maintenance-backup-'+new Date().toISOString().slice(0,10)+'.json';link.click();URL.revokeObjectURL(url)}
 function importH1Data(event){const file=event.target.files&&event.target.files[0];event.target.value='';if(!file)return;const reader=new FileReader();reader.onload=()=>{try{const backup=JSON.parse(reader.result);if(backup.format!=='H1-maintenance-backup'||!backup.data||typeof backup.data!=='object')throw new Error('格式不符');if(!confirm('載入備份會覆蓋目前的濾網、使用中狀態及油箱加油資料。確定繼續嗎？'))return;const keys=['h1-filter-records-v1','h1-active-filters-v1','h1-filter-details-v1','h1-tank-fuel-records-v1'];keys.forEach(k=>{if(Object.prototype.hasOwnProperty.call(backup.data,k))localStorage.setItem(k,JSON.stringify(backup.data[k]));else localStorage.removeItem(k)});renderFilterRecords();alert('資料載入完成。');}catch(e){alert('無法載入：檔案不是有效的 H1 備份。')}};reader.readAsText(file)}
 function saveSnapshot(showMessage=true){localStorage.setItem('h1-filter-snapshot',document.querySelector('.inside').innerHTML);if(showMessage)alert('已保存目前頁面狀態。')}function undoSnapshot(){const s=localStorage.getItem('h1-filter-snapshot');if(!s){alert('尚無可還原的上一動');return}document.querySelector('.inside').innerHTML=s;alert('已還原上一動（本地保存版本）。')}
-const CURRENT_H1_VERSION='1.0.1';
+
+function toggleLandscapeMode(){
+ const enabled=!document.body.classList.contains('landscape-mode');
+ document.documentElement.classList.toggle('landscape-mode',enabled);
+ document.body.classList.toggle('landscape-mode',enabled);
+ localStorage.setItem('h1-landscape-mode',enabled?'on':'off');
+ const buttons=document.querySelectorAll('.orientation-btn');
+ buttons.forEach(button=>{
+  button.textContent=enabled?'直向顯示':'橫向顯示';
+  button.setAttribute('aria-pressed',String(enabled));
+ });
+}
+function restoreLandscapeMode(){
+ const enabled=localStorage.getItem('h1-landscape-mode')==='on';
+ document.documentElement.classList.toggle('landscape-mode',enabled);
+ document.body.classList.toggle('landscape-mode',enabled);
+ document.querySelectorAll('.orientation-btn').forEach(button=>{
+  button.textContent=enabled?'直向顯示':'橫向顯示';
+  button.setAttribute('aria-pressed',String(enabled));
+ });
+}
+
+const CURRENT_H1_VERSION='1.0.2';
 async function checkVersion(){
  saveSnapshot(false);
  try{
@@ -230,5 +281,6 @@ async function checkVersion(){
   alert('目前無法檢查版本，請稍後再試。\n'+error.message);
  }
 }
+restoreLandscapeMode();
 </script></body>
 </html>
