@@ -20,7 +20,7 @@ main{max-width:1180px;margin:auto;padding:18px clamp(12px,3vw,28px) 36px}
 .leftwalk{display:flex;flex-direction:column;justify-content:center;gap:10px}.leftwalk .outside-card{width:100%;min-height:140px;display:flex;flex-direction:column;justify-content:center}
 .inside{border:2px solid #41566a;background:#101a24;border-radius:12px;padding:14px}
 .inside-title{font-size:13px;font-weight:700;color:#afc4d6;margin-bottom:14px}
-.filter-layout{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.filter-layout{display:grid;grid-template-columns:1fr 1fr 1.25fr 1.25fr;gap:12px;align-items:start}
 .group{display:flex;flex-direction:column;gap:9px}.group-title{text-align:center;font-size:11px;color:var(--muted);padding-bottom:3px}
 .filter{min-height:74px;display:flex;flex-direction:column;justify-content:center;text-align:center;border:1px solid #8a754a;background:var(--amber);border-radius:9px;padding:12px}
 .filter strong{font-size:14px}.filter small{font-size:11px;color:#e2d5b9;margin-top:5px}
@@ -28,7 +28,7 @@ main{max-width:1180px;margin:auto;padding:18px clamp(12px,3vw,28px) 36px}
 .highpressure{margin:14px auto 0;width:min(100%,340px);background:#49363d;border-color:#956779}
 .note{color:var(--muted);font-size:11px;margin-top:14px;text-align:center}
 footer{text-align:center;color:#71869a;font-size:11px;padding:8px 0 0}
-@media(max-width:650px){.layout{grid-template-columns:90px 1fr;gap:8px}.leftwalk .outside-card{min-height:120px;padding:10px 6px}.inside{padding:9px}.filter-layout{grid-template-columns:1fr;gap:9px}.filter{min-height:62px}.area{padding:10px}.tabs{display:grid;grid-template-columns:1fr 1fr}.tab{text-align:center;padding:10px 7px}.status{font-size:10px}}
+@media(max-width:650px){.layout{grid-template-columns:90px 1fr;gap:8px}.leftwalk .outside-card{min-height:120px;padding:10px 6px}.inside{padding:9px}.filter-layout{grid-template-columns:1fr 1fr;gap:9px}.filter{min-height:62px}.area{padding:10px}.tabs{display:grid;grid-template-columns:1fr 1fr}.tab{text-align:center;padding:10px 7px}.status{font-size:10px}}
 </style>
 </head>
 <body>
@@ -39,7 +39,7 @@ footer{text-align:center;color:#71869a;font-size:11px;padding:8px 0 0}
 <div class="layout">
 <aside class="area leftwalk"><div class="area-title">左側走道</div><div class="outside-card"><strong>真空淨油機</strong><small style="color:var(--muted);margin-top:5px">Vacuum Oil Purifier</small></div></aside>
 <section class="inside"><div class="inside-title">H1 內部｜濾網配置</div><div class="filter-layout">
-<div class="group circulation"><div class="group-title">循環區</div><div class="filter"><strong>循環東</strong><small>Circulation East</small></div><div class="filter"><strong>循環西</strong><small>Circulation West</small></div></div>
+<div class="group circulation"><div class="group-title">循環東</div><div class="filter"><strong>循環東</strong><small>Circulation East</small></div></div><div class="group circulation"><div class="group-title">循環西</div><div class="filter"><strong>循環西</strong><small>Circulation West</small></div></div>
 <div class="group return"><div class="group-title">回油區</div><div class="filter"><strong>回油南</strong><small>Return South</small></div><div class="filter"><strong>回油北</strong><small>Return North</small></div></div>
 <div class="group guide"><div class="group-title">引導區</div><div class="filter"><strong>引導南</strong><small>Guide South</small></div><div class="filter"><strong>引導北</strong><small>Guide North</small></div></div>
 </div><div class="filter highpressure"><strong>高壓濾網</strong><small>High Pressure Filter</small></div><div class="note">設備位置示意｜目前為靜態模板</div></section>
