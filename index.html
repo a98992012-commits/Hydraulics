@@ -71,7 +71,7 @@ footer{text-align:center;color:#71869a;font-size:11px;padding:8px 0 0}
 /* 手機橫向顯示切換 */
 .orientation-btn{display:none}
 @media(max-width:650px){.orientation-btn{display:inline-block}}
-html.landscape-mode,html.landscape-mode body{overflow:hidden!important}
+html.landscape-mode{overflow:hidden!important}html.landscape-mode body{overflow:auto!important}
 body.landscape-mode{
  position:fixed!important;top:0;left:0;width:100vh!important;height:100vw!important;
  max-width:none!important;overflow:auto!important;transform-origin:top left;
