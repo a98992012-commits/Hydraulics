@@ -22,7 +22,7 @@ main{max-width:1180px;margin:auto;padding:18px clamp(12px,3vw,28px) 36px}
 .inside-title{font-size:13px;font-weight:700;color:#afc4d6;margin-bottom:14px}
 .filter-layout{display:grid;grid-template-columns:1fr 1fr 1.25fr 1.25fr;gap:12px;align-items:start}
 .group{display:flex;flex-direction:column;gap:9px}.group-title{text-align:center;font-size:11px;color:var(--muted);padding-bottom:3px}
-.filter{min-height:74px;display:flex;flex-direction:column;justify-content:center;text-align:center;border:1px solid #8a754a;background:var(--amber);border-radius:9px;padding:12px}
+.filter{min-height:74px;display:flex;flex-direction:column;justify-content:center;text-align:center;border:1px solid #8a754a;background:var(--amber);border-radius:9px;padding:12px}.filter-card{gap:5px}.filter-meta{font-size:11px;color:#d4dce4;line-height:1.5}.replace-btn{align-self:center;margin-top:5px;border:1px solid #7890a4;background:#1b2d3c;color:#edf6ff;border-radius:7px;padding:6px 12px;font-size:12px;font-weight:650;cursor:pointer}.replace-btn:hover{filter:brightness(1.2)}.modal-backdrop{position:fixed;inset:0;background:#000b;display:none;align-items:center;justify-content:center;padding:18px;z-index:20}.modal-backdrop.open{display:flex}.modal{width:min(100%,390px);background:#172431;border:1px solid #496174;border-radius:13px;padding:20px;box-shadow:0 15px 50px #0009}.modal h2{font-size:18px;margin:0 0 16px}.modal label{display:block;font-size:13px;color:#c8d7e3;margin:12px 0 6px}.modal input[type=date]{width:100%;padding:10px;background:#0d1721;color:#fff;border:1px solid #496174;border-radius:8px}.choice-row{display:flex;gap:16px;flex-wrap:wrap;margin:10px 0 18px}.choice-row label{display:flex;align-items:center;gap:6px;margin:0}.modal-actions{display:flex;justify-content:flex-end;gap:8px}.modal-actions button{border:1px solid #496174;border-radius:8px;padding:9px 14px;background:#21384b;color:#fff;cursor:pointer}.modal-actions .cancel{background:#27313a}
 .filter strong{font-size:14px}.filter small{font-size:11px;color:#e2d5b9;margin-top:5px}
 .circulation .filter{border-color:#5c8a79;background:var(--green)}.guide .filter{border-color:#577792;background:var(--blue)}
 .highpressure{margin:14px auto 0;width:min(100%,340px);background:#49363d;border-color:#956779}
@@ -39,12 +39,57 @@ footer{text-align:center;color:#71869a;font-size:11px;padding:8px 0 0}
 <div class="layout">
 <aside class="area leftwalk"><div class="area-title">左側走道</div><div class="outside-card"><strong>真空淨油機</strong><small style="color:var(--muted);margin-top:5px">Vacuum Oil Purifier</small></div></aside>
 <section class="inside"><div class="inside-title">H1 內部｜濾網配置</div><div class="filter-layout">
-<div class="group circulation"><div class="group-title">循環濾網｜東側</div><div class="filter"><strong>循環濾網｜東側</strong><small>Circulation East</small></div></div><div class="group circulation"><div class="group-title">循環濾網｜西側</div><div class="filter"><strong>循環濾網｜西側</strong><small>Circulation West</small></div></div>
-<div class="group return"><div class="group-title">回油濾網</div><div class="filter"><strong>回油濾網｜南側</strong><small>Return South</small></div><div class="filter"><strong>回油濾網｜北側</strong><small>Return North</small></div></div>
-<div class="group guide"><div class="group-title">引導壓濾網</div><div class="filter"><strong>引導壓濾網｜南側</strong><small>Guide South</small></div><div class="filter"><strong>引導壓濾網｜北側</strong><small>Guide North</small></div></div>
-</div><div class="filter highpressure"><strong>高壓濾網</strong><small>High Pressure Filter</small></div><div class="note">設備位置示意｜目前為靜態模板</div></section>
+<div class="group circulation"><div class="group-title">循環濾網｜東側</div><div class="filter filter-card" data-filter-id="circulation-east"><strong>循環濾網｜東側</strong><small>Circulation East</small><div class="filter-meta"></div><button class="replace-btn" onclick="openReplace(this)">更換</button></div></div><div class="group circulation"><div class="group-title">循環濾網｜西側</div><div class="filter filter-card" data-filter-id="circulation-west"><strong>循環濾網｜西側</strong><small>Circulation West</small><div class="filter-meta"></div><button class="replace-btn" onclick="openReplace(this)">更換</button></div></div>
+<div class="group return"><div class="group-title">回油濾網</div><div class="filter filter-card" data-filter-id="return-south"><strong>回油濾網｜南側</strong><small>Return South</small><div class="filter-meta"></div><button class="replace-btn" onclick="openReplace(this)">更換</button></div><div class="filter filter-card" data-filter-id="return-north"><strong>回油濾網｜北側</strong><small>Return North</small><div class="filter-meta"></div><button class="replace-btn" onclick="openReplace(this)">更換</button></div></div>
+<div class="group guide"><div class="group-title">引導壓濾網</div><div class="filter filter-card" data-filter-id="guide-south"><strong>引導壓濾網｜南側</strong><small>Guide South</small><div class="filter-meta"></div><button class="replace-btn" onclick="openReplace(this)">更換</button></div><div class="filter filter-card" data-filter-id="guide-north"><strong>引導壓濾網｜北側</strong><small>Guide North</small><div class="filter-meta"></div><button class="replace-btn" onclick="openReplace(this)">更換</button></div></div>
+</div><div class="filter highpressure filter-card" data-filter-id="high-pressure"><strong>高壓濾網</strong><small>High Pressure Filter</small><div class="filter-meta"></div><button class="replace-btn" onclick="openReplace(this)">更換</button></div><div class="note">設備位置示意｜目前為靜態模板</div></section>
 </div>
-<footer>H1 Maintenance · Template Preview</footer>
+
+<div class="modal-backdrop" id="replaceModal" role="dialog" aria-modal="true" aria-labelledby="replaceTitle">
+ <form class="modal" onsubmit="saveReplacement(event)">
+  <h2 id="replaceTitle">濾網更換紀錄</h2>
+  <div id="replaceFilterName" style="color:#a9bdcd;font-size:13px"></div>
+  <label for="replaceDate">更換日期</label><input id="replaceDate" type="date" required>
+  <label>更換原因</label>
+  <div class="choice-row">
+   <label><input type="radio" name="replaceReason" value="定期更換" required> 定期更換</label>
+   <label><input type="radio" name="replaceReason" value="異況"> 異況</label>
+  </div>
+  <div class="modal-actions"><button type="button" class="cancel" onclick="closeReplace()">取消</button><button type="submit">確認更換</button></div>
+ </form>
+</div>\n<footer>H1 Maintenance · Template Preview</footer>
 </main>
-<script>function saveSnapshot(){localStorage.setItem('h1-filter-snapshot',document.querySelector('.inside').innerHTML);alert('已保存目前頁面狀態。')}function undoSnapshot(){const s=localStorage.getItem('h1-filter-snapshot');if(!s){alert('尚無可還原的上一動');return}document.querySelector('.inside').innerHTML=s;alert('已還原上一動（本地保存版本）。')}</script></body>
+<script>
+const FILTER_STORAGE_KEY='h1-filter-records-v1';
+let activeFilterId=null;
+function getFilterRecords(){try{return JSON.parse(localStorage.getItem(FILTER_STORAGE_KEY)||'{}')}catch(e){return {}}}
+function renderFilterRecords(){
+ const records=getFilterRecords();
+ document.querySelectorAll('.filter-card').forEach(card=>{
+  const r=records[card.dataset.filterId]||{};
+  const meta=card.querySelector('.filter-meta');
+  meta.innerHTML='上線日期：'+(r.onlineDate||'未設定')+'<br>前次更換日期：'+(r.lastReplacementDate||'未紀錄')+(r.reason?'<br>前次更換原因：'+r.reason:'');
+ });
+}
+function openReplace(button){
+ const card=button.closest('.filter-card');activeFilterId=card.dataset.filterId;
+ document.getElementById('replaceFilterName').textContent=card.querySelector('strong').textContent;
+ document.getElementById('replaceDate').value=new Date().toLocaleDateString('en-CA');
+ document.querySelectorAll('input[name="replaceReason"]').forEach(x=>x.checked=false);
+ document.getElementById('replaceModal').classList.add('open');
+}
+function closeReplace(){document.getElementById('replaceModal').classList.remove('open');activeFilterId=null}
+function saveReplacement(event){
+ event.preventDefault();if(!activeFilterId)return;
+ const date=document.getElementById('replaceDate').value;
+ const reason=document.querySelector('input[name="replaceReason"]:checked')?.value;
+ if(!date||!reason)return;
+ const records=getFilterRecords();const previous=records[activeFilterId]||{};
+ records[activeFilterId]={onlineDate:date,lastReplacementDate:date,reason:reason,history:[...(previous.history||[]),{date,reason}]};
+ localStorage.setItem(FILTER_STORAGE_KEY,JSON.stringify(records));
+ closeReplace();renderFilterRecords();
+}
+document.getElementById('replaceModal').addEventListener('click',e=>{if(e.target.id==='replaceModal')closeReplace()});
+renderFilterRecords();
+\nfunction saveSnapshot(){localStorage.setItem('h1-filter-snapshot',document.querySelector('.inside').innerHTML);alert('已保存目前頁面狀態。')}function undoSnapshot(){const s=localStorage.getItem('h1-filter-snapshot');if(!s){alert('尚無可還原的上一動');return}document.querySelector('.inside').innerHTML=s;alert('已還原上一動（本地保存版本）。')}</script></body>
 </html>
