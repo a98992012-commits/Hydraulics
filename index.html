@@ -8,7 +8,7 @@
 :root{color-scheme:dark;--bg:#0b1118;--panel:#141e29;--panel2:#1a2835;--line:#304353;--text:#e9f0f6;--muted:#9aafc1;--blue:#24435c;--green:#21493e;--amber:#4a4030}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,"Noto Sans TC",sans-serif}
 header{padding:22px clamp(14px,4vw,36px) 18px;border-bottom:1px solid #263645;background:#101923}
-.head{max-width:1180px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.head{max-width:1180px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:14px}.head-actions{display:flex;align-items:center;gap:8px;flex-shrink:0}
 h1{font-size:clamp(20px,4vw,30px);margin:0;font-weight:750;letter-spacing:.03em}.subtitle{color:var(--muted);font-size:13px;margin-top:5px}
 .status{font-size:11px;color:#9fc8dd;border:1px solid #36546a;background:#172b3b;padding:7px 10px;border-radius:999px;white-space:nowrap}
 main{max-width:1180px;margin:auto;padding:18px clamp(12px,3vw,28px) 36px}
@@ -32,9 +32,9 @@ footer{text-align:center;color:#71869a;font-size:11px;padding:8px 0 0}
 </style>
 </head>
 <body>
-<header><div class="head"><div><h1>H1 維護管理</h1><div class="subtitle">設備配置與維護資訊｜首頁模板</div></div><div class="status">H1 · 設備區</div></div></header>
+<header><div class="head"><div><h1>H1 維護管理</h1><div class="subtitle">設備配置與維護資訊｜首頁模板</div></div><div class="head-actions"><button class="actionbtn" onclick="saveSnapshot()">更新</button><button class="actionbtn" onclick="undoSnapshot()">上一動</button></div></div></header>
 <main>
-<nav class="tabs" aria-label="頁面區域"><a class="tab active" href="index.html" style="text-decoration:none">01　濾網資料</a><a class="tab" href="motors.html" style="text-decoration:none">02　馬達／油箱</a></nav><div class="actions"><button class="actionbtn" onclick="saveSnapshot()">更新</button><button class="actionbtn" onclick="undoSnapshot()">上一動</button></div>
+<nav class="tabs" aria-label="頁面區域"><a class="tab active" href="index.html" style="text-decoration:none">01　濾網資料</a><a class="tab" href="motors.html" style="text-decoration:none">02　馬達／油箱</a></nav>
 <section class="area"><div class="area-title">上方走道</div><div class="walkway"><div class="outside-card"><strong>深層淨油機</strong><small style="color:var(--muted);margin-top:5px">Deep Oil Purifier</small></div></div></section>
 <div class="layout">
 <aside class="area leftwalk"><div class="area-title">左側走道</div><div class="outside-card"><strong>真空淨油機</strong><small style="color:var(--muted);margin-top:5px">Vacuum Oil Purifier</small></div></aside>
