@@ -25,7 +25,7 @@ main{max-width:1150px;margin:auto;padding:18px clamp(12px,3vw,28px)}.tabs{displa
  <form class="modal" onsubmit="saveFuelEntry(event)">
   <h2 id="fuelTitle">油箱加油紀錄</h2>
   <label for="fuelDate">日期</label><input id="fuelDate" type="date" required>
-  <label for="fuelBarrels">桶數</label><input id="fuelBarrels" type="number" min="0.01" step="0.01" placeholder="請輸入桶數" required>
+  <label for="fuelBarrels">桶數</label><input id="fuelBarrels" type="number" min="1" step="1" placeholder="請輸入桶數" required>
   <label for="fuelNote">備註（選填）</label><textarea id="fuelNote" rows="3" placeholder="可不填寫"></textarea>
   <div class="modal-actions"><button type="button" class="cancel" onclick="closeFuelModal()">取消</button><button type="submit">確認新增</button></div>
  </form>
@@ -51,7 +51,7 @@ function saveFuelEntry(event){
  const date=document.getElementById('fuelDate').value;
  const barrels=Number(document.getElementById('fuelBarrels').value);
  const note=document.getElementById('fuelNote').value.trim();
- if(!date||!Number.isFinite(barrels)||barrels<=0)return;
+ if(!date||!Number.isInteger(barrels)||barrels<=0)return;
  const records=getFuelRecords();
  records.push({date,barrels,note});
  localStorage.setItem(FUEL_STORAGE_KEY,JSON.stringify(records));
