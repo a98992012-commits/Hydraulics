@@ -102,7 +102,7 @@ function showAllHistory(){
  });
  all.sort((a,b)=>b.date.localeCompare(a.date)||a.name.localeCompare(b.name));
  document.getElementById('historyTitle').textContent='全部歷史紀錄';
- document.getElementById('historyContent').innerHTML=all.length?all.map((item,index)=>'<div class="history-entry"><div class="history-entry-main"><b>'+item.date+'</b><br>'+item.name+'｜'+item.reason+'</div><button type="button" class="delete-btn" onclick="deleteHistoryEntry(\\''+item.id+'\\','+item.index+');showAllHistory()">刪除</button></div>').join(''):'尚無歷史紀錄。';
+ document.getElementById('historyContent').innerHTML=all.length?all.map((item,index)=>`<div class="history-entry"><div class="history-entry-main"><b>${item.date}</b><br>${item.name}｜${item.reason}</div><button type="button" class="delete-btn" onclick="deleteHistoryEntry('${item.id}',${item.index});showAllHistory()">刪除</button></div>`).join(''):'尚無歷史紀錄。';
  document.getElementById('historyModal').classList.add('open');
 }
 function showHistory(id,name){
