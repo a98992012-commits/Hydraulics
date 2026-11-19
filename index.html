@@ -66,6 +66,12 @@ const FILTER_STORAGE_KEY='h1-filter-records-v1';
 const ACTIVE_FILTER_STORAGE_KEY='h1-active-filters-v1';
 let activeFilterId=null;
 function getFilterRecords(){try{return JSON.parse(localStorage.getItem(FILTER_STORAGE_KEY)||'{}')}catch(e){return {}}}
+function syncRecordDates(record){
+ const sorted=[...(record.history||[])].sort((a,b)=>(b.date||'').localeCompare(a.date||''));
+ record.onlineDate=sorted[0]?.date||'';
+ record.previousOnlineDate=sorted[1]?.date||'';
+ record.reason=sorted[0]?.reason||'';
+}
 function getAssetName(id){const card=document.querySelector('[data-filter-id="'+id+'"]');if(card)return card.querySelector('strong').textContent;const names={'deep-purifier':'深層淨油機','vacuum-purifier':'真空淨油機'};return names[id]||id}
 function getActiveFilters(){try{return JSON.parse(localStorage.getItem(ACTIVE_FILTER_STORAGE_KEY)||'{}')}catch(e){return {}}}
 function renderActiveFilters(){
@@ -114,7 +120,7 @@ function saveReplacement(event){
  if(!date||!reason)return;
  const records=getFilterRecords();const previous=records[activeFilterId]||{};
  const history=[...(previous.history||[]),{date,reason}];
- records[activeFilterId]={onlineDate:date,previousOnlineDate:previous.onlineDate||previous.previousOnlineDate||'',reason,history};
+ records[activeFilterId]={...previous,history};syncRecordDates(records[activeFilterId]);
  localStorage.setItem(FILTER_STORAGE_KEY,JSON.stringify(records));
  closeReplace();renderFilterRecords();
 }
@@ -140,11 +146,7 @@ function deleteHistoryEntry(id,index){
  const records=getFilterRecords();const record=records[id];
  if(!record||!Array.isArray(record.history)||index<0||index>=record.history.length)return;
  record.history.splice(index,1);
- const latest=record.history[record.history.length-1];
- const previous=record.history[record.history.length-2];
- record.onlineDate=latest?latest.date:'';
- record.previousOnlineDate=previous?previous.date:'';
- record.reason=latest?latest.reason:'';
+ syncRecordDates(record);
  localStorage.setItem(FILTER_STORAGE_KEY,JSON.stringify(records));
  renderFilterRecords();
  showHistory(id,getAssetName(id));
