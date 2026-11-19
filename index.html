@@ -29,6 +29,44 @@ main{max-width:1180px;margin:auto;padding:18px clamp(12px,3vw,28px) 36px}
 .note{color:var(--muted);font-size:11px;margin-top:14px;text-align:center}
 footer{text-align:center;color:#71869a;font-size:11px;padding:8px 0 0}
 @media(max-width:650px){.tabs{align-items:stretch;flex-wrap:wrap}.tab-links{flex:1}.data-actions{width:100%;justify-content:flex-end}.layout{grid-template-columns:90px 1fr;gap:8px}.leftwalk .outside-card{min-height:120px;padding:10px 6px}.inside{padding:9px}.filter-layout{grid-template-columns:1fr 1fr;gap:9px}.filter{min-height:62px}.area{padding:10px}.tabs{display:grid;grid-template-columns:1fr 1fr}.tab{text-align:center;padding:10px 7px}.status{font-size:10px}}
+
+/* 手機直立版：避免導覽列、設備卡片與按鈕互相擠壓 */
+@media(max-width:650px){
+  html,body{max-width:100%;overflow-x:hidden}
+  header{padding:14px 12px}
+  .head{align-items:flex-start;flex-wrap:wrap}
+  .head>div:first-child{min-width:0;flex:1 1 100%}
+  .head-actions{width:100%;justify-content:flex-start;flex-wrap:wrap}
+  .head-actions .actionbtn{flex:1 1 auto;min-width:0;padding:9px 8px;font-size:12px}
+  main{padding:12px 10px 28px}
+  .tabs{display:flex;flex-wrap:wrap;align-items:stretch}
+  .tab-links{flex:1 1 100%;display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+  .tab{min-width:0;text-align:center;padding:10px 5px;font-size:12px}
+  .data-actions{width:100%;display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+  .data-btn{min-width:0;padding:10px 6px}
+  .layout{grid-template-columns:minmax(0,1fr);gap:8px}
+  .leftwalk{display:block}
+  .leftwalk .area-title{margin-bottom:8px}
+  .leftwalk .outside-card{width:100%;min-height:0;padding:30px 10px 12px}
+  .inside{min-width:0;padding:9px}
+  .filter-layout{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .group{min-width:0}
+  .filter{min-width:0;padding:36px 7px 10px;min-height:68px}
+  .filter-card>strong{font-size:13px;overflow-wrap:anywhere}
+  .filter small{font-size:10px;overflow-wrap:anywhere}
+  .filter-meta{font-size:10px;overflow-wrap:anywhere}
+  .replace-btn{max-width:100%;padding:6px 9px;font-size:11px}
+  .history-btn,.detail-btn{top:6px;padding:4px 5px;font-size:9px}
+  .highpressure{width:100%}
+  .modal{max-height:calc(100dvh - 36px);overflow-y:auto;padding:17px}
+}
+@media(max-width:380px){
+  .filter-layout{grid-template-columns:minmax(0,1fr)}
+  .filter{min-height:64px}
+  .head-actions{gap:5px}
+  .head-actions .actionbtn{font-size:11px;padding:8px 5px}
+  .area{padding:8px}
+}
 </style>
 </head>
 <body>
