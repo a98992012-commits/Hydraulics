@@ -12,7 +12,7 @@ header{padding:22px clamp(14px,4vw,36px) 18px;border-bottom:1px solid #263645;ba
 h1{font-size:clamp(20px,4vw,30px);margin:0;font-weight:750;letter-spacing:.03em}.subtitle{color:var(--muted);font-size:13px;margin-top:5px}
 .status{font-size:11px;color:#9fc8dd;border:1px solid #36546a;background:#172b3b;padding:7px 10px;border-radius:999px;white-space:nowrap}
 main{max-width:1180px;margin:auto;padding:18px clamp(12px,3vw,28px) 36px}
-.tabs{display:flex;gap:8px;margin-bottom:18px}.tab{padding:11px 17px;border-radius:9px;border:1px solid var(--line);background:#18232e;color:#a9bdcd;font-weight:650;font-size:13px}.tab.active{background:#24445d;color:#eaf5ff;border-color:#52758f}
+.tabs{display:flex;gap:8px;margin-bottom:18px}.actions{display:flex;gap:8px;justify-content:flex-end;margin:0 0 14px}.actionbtn{border:1px solid var(--line);background:#21384b;color:#dbeaf5;padding:9px 14px;border-radius:8px;font-weight:650;cursor:pointer}.actionbtn:hover{filter:brightness(1.15)}.tab{padding:11px 17px;border-radius:9px;border:1px solid var(--line);background:#18232e;color:#a9bdcd;font-weight:650;font-size:13px}.tab.active{background:#24445d;color:#eaf5ff;border-color:#52758f}
 .area{border:1px solid var(--line);background:var(--panel);border-radius:12px;padding:14px;margin-bottom:14px}
 .area-title{font-size:12px;font-weight:750;letter-spacing:.12em;color:#a8bdce;margin-bottom:12px}
 .walkway{display:flex;justify-content:center}.outside-card{width:min(100%,300px);text-align:center;background:var(--panel2);border:1px solid #40576c;border-radius:9px;padding:13px}
@@ -34,7 +34,7 @@ footer{text-align:center;color:#71869a;font-size:11px;padding:8px 0 0}
 <body>
 <header><div class="head"><div><h1>H1 維護管理</h1><div class="subtitle">設備配置與維護資訊｜首頁模板</div></div><div class="status">H1 · 設備區</div></div></header>
 <main>
-<nav class="tabs" aria-label="頁面區域"><div class="tab active">01　濾網資料</div><div class="tab">02　馬達／油箱</div></nav>
+<nav class="tabs" aria-label="頁面區域"><a class="tab active" href="index.html" style="text-decoration:none">01　濾網資料</a><a class="tab" href="motors.html" style="text-decoration:none">02　馬達／油箱</a></nav><div class="actions"><button class="actionbtn" onclick="saveSnapshot()">更新</button><button class="actionbtn" onclick="undoSnapshot()">上一動</button></div>
 <section class="area"><div class="area-title">上方走道</div><div class="walkway"><div class="outside-card"><strong>深層淨油機</strong><small style="color:var(--muted);margin-top:5px">Deep Oil Purifier</small></div></div></section>
 <div class="layout">
 <aside class="area leftwalk"><div class="area-title">左側走道</div><div class="outside-card"><strong>真空淨油機</strong><small style="color:var(--muted);margin-top:5px">Vacuum Oil Purifier</small></div></aside>
@@ -46,5 +46,5 @@ footer{text-align:center;color:#71869a;font-size:11px;padding:8px 0 0}
 </div>
 <footer>H1 Maintenance · Template Preview</footer>
 </main>
-</body>
+<script>function saveSnapshot(){localStorage.setItem('h1-filter-snapshot',document.querySelector('.inside').innerHTML);alert('已保存目前頁面狀態。')}function undoSnapshot(){const s=localStorage.getItem('h1-filter-snapshot');if(!s){alert('尚無可還原的上一動');return}document.querySelector('.inside').innerHTML=s;alert('已還原上一動（本地保存版本）。')}</script></body>
 </html>
