@@ -163,6 +163,7 @@ function deleteHistoryEntry(id,index){
 function closeHistory(){document.getElementById('historyModal').classList.remove('open')}
 document.getElementById('replaceModal').addEventListener('click',e=>{if(e.target.id==='replaceModal')closeReplace()});
 document.getElementById('filterDetailsModal').addEventListener('click',e=>{if(e.target.id==='filterDetailsModal')closeFilterDetails()});
+document.getElementById('editFilterDetailsModal').addEventListener('click',e=>{if(e.target.id==='editFilterDetailsModal')closeEditFilterDetails()});
 document.getElementById('historyModal').addEventListener('click',e=>{if(e.target.id==='historyModal')closeHistory()});
 renderFilterRecords();
 
