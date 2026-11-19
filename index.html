@@ -57,7 +57,8 @@ footer{text-align:center;color:#71869a;font-size:11px;padding:8px 0 0}
   </div>
   <div class="modal-actions"><button type="button" class="cancel" onclick="closeReplace()">取消</button><button type="submit">確認更換</button></div>
  </form>
-</div>\n<footer>H1 Maintenance · Template Preview</footer>
+</div>
+<footer>H1 Maintenance · Template Preview</footer>
 </main>
 <script>
 const FILTER_STORAGE_KEY='h1-filter-records-v1';
@@ -91,5 +92,6 @@ function saveReplacement(event){
 }
 document.getElementById('replaceModal').addEventListener('click',e=>{if(e.target.id==='replaceModal')closeReplace()});
 renderFilterRecords();
-\nfunction saveSnapshot(){localStorage.setItem('h1-filter-snapshot',document.querySelector('.inside').innerHTML);alert('已保存目前頁面狀態。')}function undoSnapshot(){const s=localStorage.getItem('h1-filter-snapshot');if(!s){alert('尚無可還原的上一動');return}document.querySelector('.inside').innerHTML=s;alert('已還原上一動（本地保存版本）。')}</script></body>
+
+function saveSnapshot(){localStorage.setItem('h1-filter-snapshot',document.querySelector('.inside').innerHTML);alert('已保存目前頁面狀態。')}function undoSnapshot(){const s=localStorage.getItem('h1-filter-snapshot');if(!s){alert('尚無可還原的上一動');return}document.querySelector('.inside').innerHTML=s;alert('已還原上一動（本地保存版本）。')}</script></body>
 </html>
