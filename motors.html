@@ -5,13 +5,13 @@
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,"Noto Sans TC",sans-serif}
 header{padding:20px clamp(12px,4vw,30px);background:#101923;border-bottom:1px solid #263645}.head{max-width:1150px;margin:auto;display:flex;justify-content:space-between;align-items:center;gap:10px}.head-actions{display:flex;gap:8px;flex-shrink:0}h1{margin:0;font-size:clamp(20px,4vw,28px)}.sub{font-size:12px;color:var(--muted);margin-top:4px}
 main{max-width:1150px;margin:auto;padding:18px clamp(12px,3vw,28px)}.tabs{display:flex;gap:8px;margin-bottom:14px}.tab,.btn{display:inline-block;border:1px solid var(--line);background:#18232e;color:#b8c9d8;padding:10px 14px;border-radius:9px;text-decoration:none;font-size:13px;font-weight:650}.tab.active{background:#24445d;color:#eef8ff}.actions{display:flex;justify-content:flex-end;gap:8px;margin-bottom:15px}.btn{cursor:pointer;background:#21384b;color:#e0edf8}
-.panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px}.label{font-size:12px;color:#a8bdce;letter-spacing:.1em;font-weight:bold;margin-bottom:12px}.inside{border:2px solid #41566a;border-radius:12px;padding:14px;background:#101a24}.floor{display:grid;grid-template-columns:1fr 2fr;gap:16px}.tank{background:#244a43;border:1px solid #5a9b84;border-radius:12px;min-height:340px;display:flex;justify-content:center;align-items:center;text-align:center;padding:20px}.tank b{font-size:20px}.right{display:grid;grid-template-rows:auto auto;gap:16px}.circulation{display:grid;grid-template-columns:1fr 1fr;gap:12px}.motor{background:#293d54;border:1px solid #637e9a;border-radius:10px;min-height:100px;padding:14px;display:flex;align-items:center;justify-content:center;text-align:center;font-weight:bold}.mainunits{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}.unit{display:grid;gap:8px}.pump{background:#334451;border:1px solid #566a7a;border-radius:9px;min-height:64px;display:flex;align-items:center;justify-content:center;text-align:center;padding:10px;font-weight:650}.caption{text-align:center;color:var(--muted);font-size:11px;margin-bottom:10px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px}.label{font-size:12px;color:#a8bdce;letter-spacing:.1em;font-weight:bold;margin-bottom:12px}.inside{border:2px solid #41566a;border-radius:12px;padding:14px;background:#101a24}.floor{display:grid;grid-template-columns:1fr 2fr;gap:16px}.tank{background:#244a43;border:1px solid #5a9b84;border-radius:12px;min-height:340px;display:flex;justify-content:center;align-items:center;text-align:center;padding:20px}.tank{flex-direction:column;gap:12px}.tank b{font-size:20px}.tank-actions{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}.tank-btn{border:1px solid #79a995;background:#183b34;color:#effff8;border-radius:8px;padding:9px 15px;font-size:13px;font-weight:700;cursor:pointer}.fuel-log{width:100%;max-width:420px;text-align:left;border-top:1px solid #5a8b7a;padding-top:10px;font-size:12px;line-height:1.7}.fuel-log-title{text-align:center;font-weight:700;margin-bottom:5px}.fuel-entry{padding:6px 0;border-bottom:1px solid #477365}.fuel-entry:last-child{border-bottom:0}.modal-backdrop{position:fixed;inset:0;background:#000b;display:none;align-items:center;justify-content:center;padding:18px;z-index:30}.modal-backdrop.open{display:flex}.modal{width:min(100%,390px);background:#172431;border:1px solid #496174;border-radius:13px;padding:20px;box-shadow:0 15px 50px #0009}.modal h2{font-size:18px;margin:0 0 16px}.modal label{display:block;font-size:13px;color:#c8d7e3;margin:12px 0 6px}.modal input,.modal textarea{width:100%;padding:10px;background:#0d1721;color:#fff;border:1px solid #496174;border-radius:8px;font:inherit}.modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:16px}.modal-actions button{border:1px solid #496174;border-radius:8px;padding:9px 14px;background:#21384b;color:#fff;cursor:pointer}.modal-actions .cancel{background:#27313a}.right{display:grid;grid-template-rows:auto auto;gap:16px}.circulation{display:grid;grid-template-columns:1fr 1fr;gap:12px}.motor{background:#293d54;border:1px solid #637e9a;border-radius:10px;min-height:100px;padding:14px;display:flex;align-items:center;justify-content:center;text-align:center;font-weight:bold}.mainunits{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}.unit{display:grid;gap:8px}.pump{background:#334451;border:1px solid #566a7a;border-radius:9px;min-height:64px;display:flex;align-items:center;justify-content:center;text-align:center;padding:10px;font-weight:650}.caption{text-align:center;color:var(--muted);font-size:11px;margin-bottom:10px}
 @media(max-width:650px){.floor{grid-template-columns:1fr!important}.tank{min-height:120px}.mainunits{grid-template-columns:1fr 1fr}.circulation{gap:8px}.inside{padding:9px}}
 </style></head><body>
 <header><div class="head"><div><h1>H1 維護管理</h1><div class="sub">設備配置與維護資訊｜馬達／油箱</div></div><div class="head-actions"><button class="btn" onclick="saveSnapshot()">更新</button><button class="btn" onclick="undoSnapshot()">上一動</button></div></div></header>
 <main><nav class="tabs"><a class="tab" href="index.html">01　濾網資料</a><a class="tab active" href="motors.html">02　馬達／油箱</a></nav>
 <section class="inside"><div class="label">H1 內部設備配置</div><div class="floor">
-<div class="tank" id="tank"><b>H1 油箱</b></div>
+<div class="tank" id="tank"><b>H1 油箱</b><div class="tank-actions"><button class="tank-btn" type="button" onclick="openFuelModal()">加油</button></div><div class="fuel-log" id="fuelLog"></div></div>
 <div class="right">
 <div class="panel"><div class="label">上方｜循環設備</div><div class="circulation"><div class="unit"><div class="motor">循環馬達 1</div><div class="pump">循環泵浦 1</div></div><div class="unit"><div class="motor">循環馬達 2</div><div class="pump">循環泵浦 2</div></div></div></div>
 <div class="panel"><div class="label">下方｜主泵浦與主馬達</div><div class="mainunits">
@@ -21,7 +21,44 @@ main{max-width:1150px;margin:auto;padding:18px clamp(12px,3vw,28px)}.tabs{displa
 <div class="unit"><div class="pump">主泵浦 4</div><div class="motor">主馬達 4</div></div>
 </div></div></div></div></section>
 </main>
+<div class="modal-backdrop" id="fuelModal" role="dialog" aria-modal="true" aria-labelledby="fuelTitle">
+ <form class="modal" onsubmit="saveFuelEntry(event)">
+  <h2 id="fuelTitle">油箱加油紀錄</h2>
+  <label for="fuelDate">日期</label><input id="fuelDate" type="date" required>
+  <label for="fuelBarrels">桶數</label><input id="fuelBarrels" type="number" min="0.01" step="0.01" placeholder="請輸入桶數" required>
+  <label for="fuelNote">備註（選填）</label><textarea id="fuelNote" rows="3" placeholder="可不填寫"></textarea>
+  <div class="modal-actions"><button type="button" class="cancel" onclick="closeFuelModal()">取消</button><button type="submit">確認新增</button></div>
+ </form>
+</div>
 <script>
+const FUEL_STORAGE_KEY='h1-tank-fuel-records-v1';
+function getFuelRecords(){try{return JSON.parse(localStorage.getItem(FUEL_STORAGE_KEY)||'[]')}catch(e){return []}}
+function renderFuelRecords(){
+ const records=getFuelRecords().slice().sort((a,b)=>(b.date||'').localeCompare(a.date||''));
+ const box=document.getElementById('fuelLog');
+ box.innerHTML=records.length?'<div class="fuel-log-title">加油紀錄</div>'+records.map(r=>'<div class="fuel-entry"><b>'+r.date+'</b>｜'+r.barrels+' 桶'+(r.note?'<br>備註：'+escapeFuelText(r.note):'')+'</div>').join(''):'尚無加油紀錄';
+}
+function escapeFuelText(value){return String(value).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));}
+function openFuelModal(){
+ document.getElementById('fuelDate').value=new Date().toLocaleDateString('en-CA');
+ document.getElementById('fuelBarrels').value='';
+ document.getElementById('fuelNote').value='';
+ document.getElementById('fuelModal').classList.add('open');
+}
+function closeFuelModal(){document.getElementById('fuelModal').classList.remove('open')}
+function saveFuelEntry(event){
+ event.preventDefault();
+ const date=document.getElementById('fuelDate').value;
+ const barrels=Number(document.getElementById('fuelBarrels').value);
+ const note=document.getElementById('fuelNote').value.trim();
+ if(!date||!Number.isFinite(barrels)||barrels<=0)return;
+ const records=getFuelRecords();
+ records.push({date,barrels,note});
+ localStorage.setItem(FUEL_STORAGE_KEY,JSON.stringify(records));
+ closeFuelModal();renderFuelRecords();
+}
+document.getElementById('fuelModal').addEventListener('click',e=>{if(e.target.id==='fuelModal')closeFuelModal()});
+renderFuelRecords();
 function saveSnapshot(){localStorage.setItem('h1-motor-snapshot',document.querySelector('.inside').innerHTML);alert('已保存目前頁面狀態。')}
 function undoSnapshot(){const s=localStorage.getItem('h1-motor-snapshot');if(!s){alert('尚無可還原的上一動');return}document.querySelector('.inside').innerHTML=s;alert('已還原上一動（本地保存版本）。')}
 </script></body></html>
