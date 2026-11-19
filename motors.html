@@ -7,6 +7,37 @@ header{padding:20px clamp(12px,4vw,30px);background:#101923;border-bottom:1px so
 main{max-width:1150px;margin:auto;padding:18px clamp(12px,3vw,28px)}.tabs{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:14px}.tab-links{display:flex;gap:8px;flex-wrap:wrap}.data-actions{display:flex;gap:7px;flex-shrink:0}.data-btn{border:1px solid #52758f;background:#21384b;color:#e0edf8;padding:9px 11px;border-radius:8px;font-size:12px;font-weight:650;cursor:pointer}.tab,.btn{display:inline-block;border:1px solid var(--line);background:#18232e;color:#b8c9d8;padding:10px 14px;border-radius:9px;text-decoration:none;font-size:13px;font-weight:650}.tab.active{background:#24445d;color:#eef8ff}.actions{display:flex;justify-content:flex-end;gap:8px;margin-bottom:15px}.btn{cursor:pointer;background:#21384b;color:#e0edf8}
 .panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px}.label{font-size:12px;color:#a8bdce;letter-spacing:.1em;font-weight:bold;margin-bottom:12px}.inside{border:2px solid #41566a;border-radius:12px;padding:14px;background:#101a24}.floor{display:grid;grid-template-columns:1fr 2fr;gap:16px}.tank{background:#244a43;border:1px solid #5a9b84;border-radius:12px;min-height:340px;display:flex;justify-content:center;align-items:center;text-align:center;padding:20px}.tank{flex-direction:column;gap:12px;position:relative}.tank-history-btn{position:absolute;top:10px;left:10px;padding:6px 9px;font-size:11px}.tank b{font-size:20px}.tank-actions{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}.tank-btn{border:1px solid #79a995;background:#183b34;color:#effff8;border-radius:8px;padding:9px 15px;font-size:13px;font-weight:700;cursor:pointer}.fuel-log{width:100%;max-width:420px;text-align:left;border-top:1px solid #5a8b7a;padding-top:10px;font-size:12px;line-height:1.7}.fuel-log-title{text-align:center;font-weight:700;margin-bottom:5px}.fuel-entry{padding:6px 0;border-bottom:1px solid #477365}.fuel-entry:last-child{border-bottom:0}.modal-backdrop{position:fixed;inset:0;background:#000b;display:none;align-items:center;justify-content:center;padding:18px;z-index:30}.modal-backdrop.open{display:flex}.modal{width:min(100%,390px);background:#172431;border:1px solid #496174;border-radius:13px;padding:20px;box-shadow:0 15px 50px #0009}.modal h2{font-size:18px;margin:0 0 16px}.modal label{display:block;font-size:13px;color:#c8d7e3;margin:12px 0 6px}.modal input,.modal textarea{width:100%;padding:10px;background:#0d1721;color:#fff;border:1px solid #496174;border-radius:8px;font:inherit}.modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:16px}.modal-actions button{border:1px solid #496174;border-radius:8px;padding:9px 14px;background:#21384b;color:#fff;cursor:pointer}.modal-actions .cancel{background:#27313a}.right{display:grid;grid-template-rows:auto auto;gap:16px}.circulation{display:grid;grid-template-columns:1fr 1fr;gap:12px}.motor{background:#293d54;border:1px solid #637e9a;border-radius:10px;min-height:100px;padding:14px;display:flex;align-items:center;justify-content:center;text-align:center;font-weight:bold}.mainunits{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}.unit{display:grid;gap:8px}.pump{background:#334451;border:1px solid #566a7a;border-radius:9px;min-height:64px;display:flex;align-items:center;justify-content:center;text-align:center;padding:10px;font-weight:650}.caption{text-align:center;color:var(--muted);font-size:11px;margin-bottom:10px}
 @media(max-width:650px){.tabs{align-items:stretch;flex-wrap:wrap}.tab-links{flex:1}.data-actions{width:100%;justify-content:flex-end}.floor{grid-template-columns:1fr!important}.tank{min-height:120px}.mainunits{grid-template-columns:1fr 1fr}.circulation{gap:8px}.inside{padding:9px}}
+
+/* 手機直立版：設備區塊改為單欄堆疊，避免內容超出螢幕 */
+@media(max-width:650px){
+  html,body{max-width:100%;overflow-x:hidden}
+  header{padding:14px 12px}
+  .head{align-items:flex-start;flex-wrap:wrap}
+  .head>div:first-child{min-width:0;flex:1 1 100%}
+  .head-actions{width:100%;justify-content:flex-start;flex-wrap:wrap}
+  .head-actions .btn{flex:1 1 auto;min-width:0;text-align:center;padding:9px 8px;font-size:12px}
+  main{padding:12px 10px 24px}
+  .tabs{display:flex;flex-wrap:wrap;align-items:stretch}
+  .tab-links{flex:1 1 100%;display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+  .tab{min-width:0;text-align:center;padding:10px 5px;font-size:12px}
+  .data-actions{width:100%;display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+  .data-btn{min-width:0;padding:10px 6px}
+  .inside,.panel,.floor,.right,.tank,.unit{min-width:0}
+  .floor{grid-template-columns:minmax(0,1fr)}
+  .tank{min-height:150px;padding:34px 12px 14px}
+  .right{grid-template-columns:minmax(0,1fr);gap:10px}
+  .circulation{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .mainunits{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .motor,.pump{min-width:0;padding:10px 5px;overflow-wrap:anywhere;font-size:13px}
+  .panel{padding:10px}
+  .modal{max-height:calc(100dvh - 36px);overflow-y:auto;padding:17px}
+}
+@media(max-width:380px){
+  .head-actions{gap:5px}
+  .head-actions .btn{font-size:11px;padding:8px 5px}
+  .tank b{font-size:18px}
+  .motor,.pump{font-size:12px}
+}
 </style></head><body>
 <header><div class="head"><div><h1>H1 維護管理</h1><div class="sub">設備配置與維護資訊｜馬達／油箱</div></div><div class="head-actions"><button class="btn" onclick="saveSnapshot()">更新</button><button class="btn" onclick="undoSnapshot()">上一動</button></div></div></header>
 <main><nav class="tabs"><div class="tab-links"><a class="tab" href="index.html">01　濾網資料</a><a class="tab active" href="motors.html">02　馬達／油箱</a></div><div class="data-actions"><button class="data-btn" type="button" onclick="exportH1Data()">匯出資料</button><button class="data-btn" type="button" onclick="document.getElementById(&quot;importDataFile&quot;).click()">載入資料</button><input id="importDataFile" type="file" accept="application/json,.json" hidden onchange="importH1Data(event)"></div></nav>
